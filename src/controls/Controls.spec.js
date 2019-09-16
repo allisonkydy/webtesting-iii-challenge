@@ -41,7 +41,7 @@ test("Locked toggle button text changes to lock when clicked", () => {
 
 test("Closed toggle button is disabled if gate is locked", () => {
   const { getByText } = render(<Controls locked={true} closed={true} />);
-  expect(getByText(/open gate/i).disabled).toBe(true);
+  expect(getByText(/open gate/i)).toBeDisabled();
 });
 
 test("Locked toggle button is disabled if gate is open", () => {

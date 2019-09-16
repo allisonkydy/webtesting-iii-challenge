@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+import "@testing-library/jest-dom/extend-expect";
 
 import Display from '../display/Display';
 
@@ -29,8 +30,8 @@ test('Display shows Closed if closed is true', () => {
 
 test('Display elements use red-led class when locked or closed', () => {
   const { getByText } = render(<Display locked={true} closed={true} />);
-  expect(getByText(/closed/i).classList.contains('red-led')).toBe(true);
-  expect(getByText(/locked/i).classList.contains('red-led')).toBe(true);
+  expect(getByText(/closed/i)).toHaveClass('red-led');
+  expect(getByText(/locked/i)).toHaveClass('red-led');
 })
 
 test('Display elements use green-led class when unlocked or open', () => {
