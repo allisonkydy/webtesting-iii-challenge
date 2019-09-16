@@ -48,3 +48,37 @@ test("Locked toggle button is disabled if gate is open", () => {
   const { getByText } = render(<Controls locked={false} closed={false} />);
   expect(getByText(/lock gate/i).disabled).toBe(true);
 });
+
+test("Closed toggle button triggers toggle functions when clicked", () => {
+  const toggleClosed = jest.fn();
+  const { getByText } = render(
+    <Controls
+      closed={false}
+      locked={false}
+      toggleClosed={toggleClosed}
+    />
+  );
+
+  const closedButton = getByText(/close gate/i);
+
+  fireEvent.click(closedButton);
+
+  expect(toggleClosed).toHaveBeenCalled();
+});
+
+test("Locked toggle button triggers toggle functions when clicked", () => {
+  const toggleLocked = jest.fn();
+  const { getByText } = render(
+    <Controls
+      closed={true}
+      locked={false}
+      toggleLocked={toggleLocked}
+    />
+  );
+  
+  const lockedButton = getByText(/lock gate/i);
+
+  fireEvent.click(lockedButton);
+
+  expect(toggleLocked).toHaveBeenCalled();
+});
